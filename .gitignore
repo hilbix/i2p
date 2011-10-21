@@ -22,8 +22,12 @@ verify.out
 *.tar
 *.war
 *.zip
-/i2p.i2p/pkg-temp/
-/i2p.i2p/debian/copyright
 build/
 classes/
+/i2p.i2p/pkg-temp/
+/i2p.i2p/debian/copyright
+/i2p.i2p/apps/jetty/jetty-*.tgz
+/i2p.i2p/apps/jetty/verified.txt
 override.properties
+web-out.xml
+web-fragment.xml
