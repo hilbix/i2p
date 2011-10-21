@@ -84,8 +84,6 @@ Branches
 * master: This contains the official, unmodified repository so far.
 * tino: This is my private repository which contains my local changes.
 
-Note that you can find all other branches and tags from mercurial, too, as I use hg-git to pull data into GIT.
-
 
 Usage
 =====
