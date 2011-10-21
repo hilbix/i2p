@@ -2,6 +2,9 @@
 
 all:	i2p.i2p
 
+clean:	i2p.i2p
+	cd i2p.i2p; ant distclean
+
 update:		i2p.i2p
 	bin/update.sh
 
