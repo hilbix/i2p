@@ -110,3 +110,10 @@ Bugs
 
 * bin/setup-debian.sh is not yet tested against a minimal Debian VM, so it probably does not pull everything which is needed.
 
+
+FAQ
+===
+
+* Jetty download fails with "Network unreachable":
+	Check `/proc/sys/net/ipv6/bindv6only` is `0`.  If not edit `/etc/sysctl.d/bindv6only.conf` and set `net.ipv6.bindv6only=0`.  run `sudo sysctl net.ipv6.bindv6only=0` to set this parameter, too.  See also URL http://zzz.i2p.to/topics/653
+
