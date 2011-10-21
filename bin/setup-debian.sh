@@ -17,4 +17,4 @@ exit 1
 
 [ 0 = "`id -u`" ] || OOPS this needs root
 
-apt-get install monotone sun-java6-jdk ant libsqlite3-dev gnupg
+apt-get install monotone sun-java6-jdk ant libsqlite3-dev gnupg gawk
