@@ -60,10 +60,21 @@ Having said this, I must add that it is somewhat difficult to get all the pieces
 Build
 =====
 
+Initial
+-------
+
 ```bash
 git clone https://github.com/hilbix/i2p
+sudo bin/setup-debian.sh
 cd i2p.i2p
 ant pkg
+```
+
+Later
+-----
+
+```bash
+bin/update.sh [branch]
 ```
 
 
@@ -74,4 +85,30 @@ Branches
 * tino: This is my private repository which contains my local changes.
 
 Note that you can find all other branches and tags from mercurial, too, as I use hg-git to pull data into GIT.
+
+
+Usage
+=====
+
+There are a couple of files in bin/ - they should have a comment at the beginning what they do.
+
+There are a couple of files in files/ which are used by the scripts in bin/
+
+The most important scripts:
+
+`bin/update.sh` [branch]
+	Pulls latest branch from GIT and builds the updater by calling `ant updater`
+
+`bin/setup-mtn.sh`
+	Extremely slow: Pulls the source i2p.mtn from mtn.i2p2.de and checks them.
+
+`bin/verify-jrandom.sh`
+	Verifies the integrity of the base of i2p.mtn by comparing it to the lastest JRandom I2P 0.6.1.30 release.
+	This is not yet really complete.
+
+
+Bugs
+====
+
+* bin/setup-debian.sh is not yet tested against a minimal Debian VM, so it probably does not pull everything which is needed.
 

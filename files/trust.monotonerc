@@ -1,0 +1,20 @@
+function intersection(a,b)
+ local s={}
+ local t={}
+ for k,v in pairs(a) do s[v.name] = 1 end
+ for k,v in pairs(b) do if s[v] ~= nil then table.insert(t,v) end end
+ return t
+end
+
+function get_revision_cert_trust(signers, id, name, val)
+ local trusted_signers = {
+ "complication@mail.i2p",
+ "dev@welterde.de",
+ "zzz@mail.i2p",
+ "jrandom@i2p.net"
+ }
+ local t = intersection(signers, trusted_signers)
+ if t == nil then return false end
+ if table.getn(t) >= 1 then return true end
+ return false
+end

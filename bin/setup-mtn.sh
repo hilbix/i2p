@@ -1,4 +1,10 @@
 #!/bin/bash
+#
+# Setup Monotone - START HERE if you want to pull I2P from official sources
+#
+# This is mainly for bootstrapping to get the sources out of Monotone
+# into GIT.  Usually you do not need to run it, except the
+# GIT repo is outdated and you want to update it.
 
 set -e
 cd "`dirname "$0"`"
@@ -13,33 +19,29 @@ exit 1
 
 [ 0 = "`id -u`" ] && OOPS must not be root
 
-mkdir -p "$HOME/.monotone" &&
-cat <<EOF >"$HOME/.monotone/monotonerc"
+cat <<EOF
 
-function intersection(a,b)
- local s={}
- local t={}
- for k,v in pairs(a) do s[v] = 1 end
- for k,v in pairs(b) do if s[v] ~= nil then table.insert(t,v) end end
- return t
-end
+WARNING!
 
-function get_revision_cert_trust(signers, id, name, val)
- local trusted_signers = {
- "jrandom@i2p.net",
- "complication@mail.i2p",
- "zzz@mail.i2p",
- "dev@welterde.de"
- }
- local t = intersection(signers, trusted_signers)
- if t == nil then return false end
- if table.getn(t) >= 1 then return true end
- return false
-end
+This pulls over 60 MiB of data over a really slow link.
+It will take an hour or more.
+
+If it stalls for 15 minutes or so, do not interrupt.
+And if you think you waited long enough, wait a bit longer.
 
 EOF
 
-mtn --db=i2p.mtn db init
-#mtn --db=i2p.mtn read < i2p-maintainer-keys.txt
-mtn --db=i2p.mtn pull mtn.i2p2.de i2p.i2p
-mtn --db=i2p.mtn checkout --branch=i2p.i2p
+bin/setup-mtn-trust.sh
+
+# If you want to start from scratch because you have messed up i2p.mtn, just
+#	rm -f i2p.mtn
+# It is then quickly rebuild from i2p.mtn.dist, provided that is still around
+[ ! -s i2p.mtn ] && [ -f i2p.mtn.dist ] && cp i2p.mtn.dist i2p.mtn
+
+[ -f i2p.mtn ] || mtn --db=i2p.mtn db init
+
+bin/mtn-pull.sh
+cp i2p.mtn i2p.mtn.dist
+
+bin/verify-mtn-keys.sh
+
