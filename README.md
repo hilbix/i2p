@@ -114,6 +114,17 @@ Bugs
 FAQ
 ===
 
-* Jetty download fails with "Network unreachable":
+* Jetty download fails with "Network unreachable" / Caveats when IPv6 is available:
 	Check `/proc/sys/net/ipv6/bindv6only` is `0`.  If not edit `/etc/sysctl.d/bindv6only.conf` and set `net.ipv6.bindv6only=0`.  run `sudo sysctl net.ipv6.bindv6only=0` to set this parameter, too.  See also URL http://zzz.i2p.to/topics/653
+
+* How to install I2P and get it started?
+	`adduser i2p; su - i2p; java -jar /path/to/installer.jar -console`
+	Install it to `/home/i2p/i2p`, then `cd i2p/; ./i2psvc wrapper.cfg`
+	`lynx http://127.0.0.1:7657/`
+	This short answer here is not meant to be complete.
+
+* How to update I2P?
+	`cd i2p.i2p; ant updater`
+	`su - i2p; cp /path/to/update.zip i2p/`
+	Restart the router
 
